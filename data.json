@@ -1,0 +1,118 @@
+{
+  "updated_at": "2026-03-01T18:36:49.372196+00:00",
+  "openclaw": {
+    "sessions": [
+      {
+        "key": "agent:main:telegram:direct:1695967946",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 127703,
+        "percentUsed": 64,
+        "remainingTokens": 72297,
+        "contextTokens": 200000,
+        "inputTokens": 6,
+        "outputTokens": 964,
+        "cacheRead": 287049,
+        "cacheWrite": 222344
+      },
+      {
+        "key": "agent:main:main",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 109418,
+        "percentUsed": 55,
+        "remainingTokens": 90582,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 8,
+        "cacheRead": 109415,
+        "cacheWrite": 0
+      },
+      {
+        "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772389446.176539",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 38751,
+        "percentUsed": 19,
+        "remainingTokens": 161249,
+        "contextTokens": 200000,
+        "inputTokens": 11,
+        "outputTokens": 1611,
+        "cacheRead": 329554,
+        "cacheWrite": 4184
+      },
+      {
+        "key": "agent:main:subagent:537bf39d-ec8f-4b56-b08e-308a06ad4ce9",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 52050,
+        "percentUsed": 26,
+        "remainingTokens": 147950,
+        "contextTokens": 200000,
+        "inputTokens": 26,
+        "outputTokens": 13802,
+        "cacheRead": 705517,
+        "cacheWrite": 52049
+      },
+      {
+        "key": "agent:main:subagent:85b7e31b-49f4-4b4d-920c-3bbf1d5f5585",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 24243,
+        "percentUsed": 12,
+        "remainingTokens": 175757,
+        "contextTokens": 200000,
+        "inputTokens": 9,
+        "outputTokens": 7873,
+        "cacheRead": 115725,
+        "cacheWrite": 24242
+      },
+      {
+        "key": "agent:main:subagent:2f14f1be-ca9e-4dfd-b6b5-393753ef735e",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 18610,
+        "percentUsed": 9,
+        "remainingTokens": 181390,
+        "contextTokens": 200000,
+        "inputTokens": 6,
+        "outputTokens": 3057,
+        "cacheRead": 50652,
+        "cacheWrite": 18609
+      },
+      {
+        "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772386619.962849",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 36360,
+        "percentUsed": 18,
+        "remainingTokens": 163640,
+        "contextTokens": 200000,
+        "inputTokens": 5,
+        "outputTokens": 445,
+        "cacheRead": 55585,
+        "cacheWrite": 18588
+      },
+      {
+        "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772382830.059719",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 51913,
+        "percentUsed": 26,
+        "remainingTokens": 148087,
+        "contextTokens": 200000,
+        "inputTokens": 4,
+        "outputTokens": 320,
+        "cacheRead": 55290,
+        "cacheWrite": 24861
+      }
+    ],
+    "count": 24
+  },
+  "gumroad": {
+    "error": "no_token",
+    "note": "Get your access token from https://app.gumroad.com/settings/advanced and save to ~/.openclaw/gumroad_token",
+    "total_sales_count": null,
+    "total_revenue_cents": null,
+    "recent_sales": []
+  },
+  "instagram": {
+    "username": "the.typesetter",
+    "follower_count": 1,
+    "following_count": 0,
+    "media_count": 2,
+    "full_name": ""
+  }
+}
