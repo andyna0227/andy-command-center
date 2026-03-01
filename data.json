@@ -1,18 +1,20 @@
 {
-  "updated_at": "2026-03-01T18:36:49.372196+00:00",
+  "updated_at": "2026-03-01T18:42:03.008910+00:00",
   "openclaw": {
     "sessions": [
       {
         "key": "agent:main:telegram:direct:1695967946",
         "model": "claude-sonnet-4-6",
-        "totalTokens": 127703,
+        "totalTokens": 127704,
         "percentUsed": 64,
-        "remainingTokens": 72297,
+        "remainingTokens": 72296,
         "contextTokens": 200000,
-        "inputTokens": 6,
-        "outputTokens": 964,
-        "cacheRead": 287049,
-        "cacheWrite": 222344
+        "inputTokens": 12,
+        "outputTokens": 1148,
+        "cacheRead": 1052089,
+        "cacheWrite": 222416,
+        "estimatedCost": 0.3329,
+        "updatedAt": 1772390436693
       },
       {
         "key": "agent:main:main",
@@ -23,8 +25,24 @@
         "contextTokens": 200000,
         "inputTokens": 3,
         "outputTokens": 8,
-        "cacheRead": 109415,
-        "cacheWrite": 0
+        "cacheRead": 0,
+        "cacheWrite": 109415,
+        "estimatedCost": 0.0001,
+        "updatedAt": 1772390436677
+      },
+      {
+        "key": "agent:main:subagent:443a5318-7714-4064-8311-a1bc9caf43c2",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 35929,
+        "percentUsed": 18,
+        "remainingTokens": 164071,
+        "contextTokens": 200000,
+        "inputTokens": 13,
+        "outputTokens": 13389,
+        "cacheRead": 263761,
+        "cacheWrite": 35928,
+        "estimatedCost": 0.28,
+        "updatedAt": 1772390227980
       },
       {
         "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772389446.176539",
@@ -36,7 +54,9 @@
         "inputTokens": 11,
         "outputTokens": 1611,
         "cacheRead": 329554,
-        "cacheWrite": 4184
+        "cacheWrite": 4184,
+        "estimatedCost": 0.1231,
+        "updatedAt": 1772389621409
       },
       {
         "key": "agent:main:subagent:537bf39d-ec8f-4b56-b08e-308a06ad4ce9",
@@ -48,7 +68,9 @@
         "inputTokens": 26,
         "outputTokens": 13802,
         "cacheRead": 705517,
-        "cacheWrite": 52049
+        "cacheWrite": 52049,
+        "estimatedCost": 0.4188,
+        "updatedAt": 1772389470785
       },
       {
         "key": "agent:main:subagent:85b7e31b-49f4-4b4d-920c-3bbf1d5f5585",
@@ -60,7 +82,9 @@
         "inputTokens": 9,
         "outputTokens": 7873,
         "cacheRead": 115725,
-        "cacheWrite": 24242
+        "cacheWrite": 24242,
+        "estimatedCost": 0.1528,
+        "updatedAt": 1772388889302
       },
       {
         "key": "agent:main:subagent:2f14f1be-ca9e-4dfd-b6b5-393753ef735e",
@@ -72,7 +96,23 @@
         "inputTokens": 6,
         "outputTokens": 3057,
         "cacheRead": 50652,
-        "cacheWrite": 18609
+        "cacheWrite": 18609,
+        "estimatedCost": 0.0611,
+        "updatedAt": 1772388462612
+      },
+      {
+        "key": "telegram:slash:1695967946",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": null,
+        "percentUsed": null,
+        "remainingTokens": null,
+        "contextTokens": 200000,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "estimatedCost": 0.0,
+        "updatedAt": 1772386857532
       },
       {
         "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772386619.962849",
@@ -84,7 +124,9 @@
         "inputTokens": 5,
         "outputTokens": 445,
         "cacheRead": 55585,
-        "cacheWrite": 18588
+        "cacheWrite": 18588,
+        "estimatedCost": 0.0234,
+        "updatedAt": 1772386766728
       },
       {
         "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772382830.059719",
@@ -96,17 +138,26 @@
         "inputTokens": 4,
         "outputTokens": 320,
         "cacheRead": 55290,
-        "cacheWrite": 24861
+        "cacheWrite": 24861,
+        "estimatedCost": 0.0214,
+        "updatedAt": 1772386598074
       }
     ],
-    "count": 24
-  },
-  "gumroad": {
-    "error": "no_token",
-    "note": "Get your access token from https://app.gumroad.com/settings/advanced and save to ~/.openclaw/gumroad_token",
-    "total_sales_count": null,
-    "total_revenue_cents": null,
-    "recent_sales": []
+    "byModel": [
+      {
+        "model": "claude-sonnet-4-6",
+        "inputTokens": 89,
+        "outputTokens": 41653,
+        "cacheRead": 2628173,
+        "cacheWrite": 510292,
+        "cacheHitPct": 98.4,
+        "estimatedCost": 1.4135,
+        "sessions": 10
+      }
+    ],
+    "totalCost": 1.4135,
+    "sessionCount": 10,
+    "note": "Costs are estimates based on public token pricing"
   },
   "instagram": {
     "username": "the.typesetter",
@@ -114,5 +165,9 @@
     "following_count": 0,
     "media_count": 2,
     "full_name": ""
+  },
+  "gumroad": {
+    "error": "no_token",
+    "note": "Save token to ~/.openclaw/gumroad_token"
   }
 }
