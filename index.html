@@ -1,222 +1,351 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mission Control</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg-primary:#0d0d0d;--bg-secondary:#1a1a1a;--bg-card:#1e1e1e;--bg-hover:#252525;--border:#2a2a2a;--text-primary:#ececec;--text-secondary:#888;--text-muted:#555;--accent:#10a37f;--accent-dim:rgba(16,163,127,0.15);--red:#ef4444;--yellow:#f59e0b;--green:#10a37f;--radius:12px}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:24px;line-height:1.5}
-header{display:flex;justify-content:space-between;align-items:center;padding:16px 0 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
-header h1{font-size:24px;font-weight:600;letter-spacing:-0.5px}
-header h1 span{opacity:0.6;margin-right:8px}
-.header-right{text-align:right}
-#clock{font-size:14px;color:var(--text-secondary);font-weight:400;font-variant-numeric:tabular-nums}
-#last-updated{font-size:11px;color:var(--text-muted);margin-top:3px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:24px}
-.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:14px;padding-left:2px}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:background 0.2s,border-color 0.2s}
-.card:hover{background:var(--bg-hover);border-color:#333}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.card-title{font-size:15px;font-weight:600}
-.card-badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
-.badge-green{background:var(--accent-dim);color:var(--accent)}
-.badge-yellow{background:rgba(245,158,11,0.15);color:var(--yellow)}
-.badge-red{background:rgba(239,68,68,0.15);color:var(--red)}
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13px}
-.stat-label{color:var(--text-secondary)}
-.stat-value{font-weight:500;font-variant-numeric:tabular-nums}
-.stat-value.accent{color:var(--accent)}
-.divider{border:none;border-top:1px solid var(--border);margin:12px 0}
-.progress-wrap{width:100%;height:6px;background:var(--bg-primary);border-radius:3px;overflow:hidden;margin-top:8px}
-.progress-bar{height:100%;border-radius:3px;transition:width 0.6s ease}
-.progress-green{background:var(--accent)}
-.progress-yellow{background:var(--yellow)}
-.progress-red{background:var(--red)}
-.session-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
-.session-item:last-child{border-bottom:none}
-.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.dot-active{background:var(--accent);box-shadow:0 0 6px rgba(16,163,127,0.4)}
-.dot-idle{background:#444}
-.session-name{flex:1;font-weight:500}
-.session-meta{color:var(--text-secondary);font-size:12px}
-.alert-item{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:8px;margin-bottom:8px;font-size:13px;font-weight:500}
-.alert-info{background:var(--accent-dim);color:var(--accent)}
-.alert-warn{background:rgba(245,158,11,0.1);color:var(--yellow)}
-.alert-danger{background:rgba(239,68,68,0.1);color:var(--red)}
-.budget-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
-.budget-label{font-size:13px;color:var(--text-secondary)}
-.budget-value{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
-.full-width{grid-column:1/-1}
-.loading{color:var(--text-muted);font-style:italic}
-@media(max-width:700px){body{padding:16px}.grid{grid-template-columns:1fr}header{flex-direction:column;gap:8px;align-items:flex-start}}
-</style>
-</head>
-<body>
-<header>
-  <h1><span>🤖</span> Mission Control</h1>
-  <div class="header-right">
-    <div id="clock"></div>
-    <div id="last-updated">Loading data…</div>
-  </div>
-</header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mission Control</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0d0d0d;
+        --card: #151515;
+        --border: #1f1f1f;
+        --muted: #8c90a4;
+        --accent-green: #28f09c;
+        --accent-red: #ff5f5f;
+        --accent-purple: #c084fc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: #f8fafc;
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        padding: 2.5rem clamp(1.25rem, 3vw, 3.5rem) 3.5rem;
+      }
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      header h1 {
+        margin: 0;
+        font-size: clamp(2.25rem, 4vw, 3rem);
+        letter-spacing: 0.03em;
+      }
+      header p {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+      }
+      .actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.75rem;
+      }
+      button {
+        border: 1px solid var(--accent-purple);
+        background: transparent;
+        color: #f8fafc;
+        padding: 0.6rem 1.5rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.25s, color 0.25s;
+      }
+      button:hover {
+        background: var(--accent-purple);
+        color: #0d0d0d;
+      }
+      .timestamp {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        min-height: 220px;
+      }
+      .card h2 {
+        margin: 0 0 1rem;
+        font-size: 1.25rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .metric {
+        font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+        font-weight: 700;
+        margin: 0.2rem 0;
+      }
+      .metric span {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 500;
+        margin-left: 0.5rem;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .badge.green {
+        background: rgba(40, 240, 156, 0.12);
+        color: var(--accent-green);
+      }
+      .badge.red {
+        background: rgba(255, 95, 95, 0.12);
+        color: var(--accent-red);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.45rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      th {
+        color: var(--muted);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.78rem;
+      }
+      ul.breakdown {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 0;
+      }
+      ul.breakdown li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.35rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 0.95rem;
+      }
+      .active-placeholder {
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        padding: 1rem;
+        border-radius: 0.75rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      @media (max-width: 640px) {
+        .actions {
+          width: 100%;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Mission Control</h1>
+        <p>Live systems overview across agents, spend, and runway.</p>
+      </div>
+      <div class="actions">
+        <button id="refreshBtn">Refresh Data</button>
+        <div class="timestamp">Last updated <span id="updatedAt">—</span></div>
+      </div>
+    </header>
 
-<div class="section-title">Model Usage</div>
-<div class="grid" id="model-usage-grid">
-  <div class="card"><div class="card-header"><div class="card-title loading">Loading…</div></div></div>
-</div>
+    <main>
+      <section class="card" id="ai-costs">
+        <h2>AI Costs</h2>
+        <div class="metric" id="aiTokens">—<span>tokens today</span></div>
+        <div class="metric" id="aiSpend">—<span>est. cost</span></div>
+        <table id="modelsTable">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Runs</th>
+              <th>Tokens</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="muted" id="aiNote"></p>
+      </section>
 
-<div class="section-title">Active Sessions</div>
-<div class="grid">
-  <div class="card full-width" id="sessions-list">
-    <div class="session-item"><div class="status-dot dot-idle"></div><div class="session-name loading">Loading…</div></div>
-  </div>
-</div>
+      <section class="card" id="infrastructure">
+        <h2>Infrastructure</h2>
+        <div class="metric" id="railwaySpend">—<span>Railway monthly spend</span></div>
+        <ul class="breakdown" id="railwayBreakdown"></ul>
+        <div class="metric" id="dataforseoBalance" style="margin-top:1.5rem;">
+          —<span>DataForSEO balance</span>
+        </div>
+        <p class="muted" id="infrastructureNote"></p>
+      </section>
 
-<div class="section-title">Gumroad Sales</div>
-<div class="grid">
-  <div class="card" id="gumroad-card">
-    <div class="card-header"><div class="card-title">The Typesetter</div><div class="card-badge badge-green">Live</div></div>
-    <div class="stat-row"><span class="stat-label">Total sales</span><span class="stat-value" id="gr-sales">—</span></div>
-    <div class="stat-row"><span class="stat-label">Total revenue</span><span class="stat-value accent" id="gr-revenue">—</span></div>
-    <hr class="divider">
-    <div id="gr-recent"></div>
-  </div>
-</div>
+      <section class="card" id="gumroad">
+        <h2>Gumroad</h2>
+        <div class="metric" id="gumroadSales">—<span>total sales</span></div>
+        <div class="metric" id="gumroadRevenue">—<span>revenue</span></div>
+        <p class="muted" id="gumroadNote"></p>
+      </section>
 
-<div class="section-title">Instagram — @the.typesetter</div>
-<div class="grid">
-  <div class="card">
-    <div class="card-header"><div class="card-title">@the.typesetter</div><div class="card-badge badge-green">Live</div></div>
-    <div class="stat-row"><span class="stat-label">Followers</span><span class="stat-value accent" id="ig-followers">—</span></div>
-    <div class="stat-row"><span class="stat-label">Following</span><span class="stat-value" id="ig-following">—</span></div>
-    <div class="stat-row"><span class="stat-label">Posts</span><span class="stat-value" id="ig-posts">—</span></div>
-  </div>
-</div>
+      <section class="card" id="cosmodigest">
+        <h2>CosmoDigest</h2>
+        <div id="cosmoStatus" class="badge">Checking…</div>
+        <div class="metric" id="cosmoUsers">—<span>users</span></div>
+        <div class="metric" id="cosmoArticles">—<span>articles</span></div>
+        <div class="metric" id="cosmoSources">—<span>sources</span></div>
+        <p class="muted" id="cosmoNote"></p>
+      </section>
 
-<div class="section-title">Context Usage</div>
-<div class="grid" id="budget-grid">
-  <div class="card"><div class="card-header"><div class="card-title loading">Loading…</div></div></div>
-</div>
+      <section class="card" id="activeAgents">
+        <h2>Active Agents</h2>
+        <div class="active-placeholder" id="agentsNote">
+          Add current deployments or sprint owners here.
+        </div>
+      </section>
+    </main>
 
-<div class="section-title">Alerts</div>
-<div style="max-width:700px" id="alerts-section">
-  <div class="alert-item alert-info"><span>ℹ️</span> Fetching live data…</div>
-</div>
+    <script>
+      const fmtCurrency = (value) =>
+        typeof value === "number"
+          ? `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+          : "—";
 
-<script>
-function updateClock(){var n=new Date();var o={weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true,timeZone:'America/New_York'};document.getElementById('clock').textContent=n.toLocaleString('en-US',o);}
-updateClock();setInterval(updateClock,1000);
-function fmt(n){return n==null?'—':n.toLocaleString();}
-function fmtTokens(n){if(n==null)return '—';if(n>=1e6)return (n/1e6).toFixed(1)+'M';if(n>=1e3)return (n/1e3).toFixed(1)+'k';return String(n);}
-function fmtPct(p){return p==null?'—':p+'%';}
+      const fmtNumber = (value) =>
+        typeof value === "number"
+          ? value.toLocaleString(undefined, { maximumFractionDigits: 0 })
+          : "—";
 
-function populateDashboard(d){
-  var ts=new Date(d.updated_at);
-  document.getElementById('last-updated').textContent='Last updated: '+ts.toLocaleTimeString('en-US',{timeZone:'America/New_York'});
+      const setText = (selector, value) => {
+        const el = document.querySelector(selector);
+        if (el) {
+          el.textContent = value;
+        }
+      };
 
-  var sessions=(d.openclaw&&d.openclaw.sessions)||[];
+      function renderModels(models) {
+        const tbody = document.querySelector("#modelsTable tbody");
+        tbody.innerHTML = "";
+        if (!models?.length) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.textContent = "No runs logged";
+          cell.colSpan = 4;
+          cell.style.color = "var(--muted)";
+          row.appendChild(cell);
+          tbody.appendChild(row);
+          return;
+        }
+        models.forEach((model) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${model.model}</td>
+            <td>${model.sessions}</td>
+            <td>${fmtNumber(model.tokens)}</td>
+            <td>${fmtCurrency(model.costUsd)}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
 
-  // Model usage cards
-  var byModel={};
-  sessions.forEach(function(s){
-    var m=s.model||'unknown';
-    if(!byModel[m])byModel[m]={model:m,totalTokens:0,inputTokens:0,outputTokens:0,cacheRead:0,cacheWrite:0,sessions:0};
-    byModel[m].totalTokens+=s.totalTokens||0;
-    byModel[m].inputTokens+=s.inputTokens||0;
-    byModel[m].outputTokens+=s.outputTokens||0;
-    byModel[m].cacheRead+=s.cacheRead||0;
-    byModel[m].cacheWrite+=s.cacheWrite||0;
-    byModel[m].sessions++;
-  });
-  var mg=document.getElementById('model-usage-grid');mg.innerHTML='';
-  Object.values(byModel).forEach(function(m){
-    var cacheHitPct=m.cacheRead+m.inputTokens>0?Math.round(m.cacheRead/(m.cacheRead+m.inputTokens)*100):0;
-    var card=document.createElement('div');card.className='card';
-    card.innerHTML='<div class="card-header"><div class="card-title">'+m.model+'</div><div class="card-badge badge-green">'+m.sessions+' session'+(m.sessions>1?'s':'')+'</div></div>'+
-      '<div class="stat-row"><span class="stat-label">Input tokens</span><span class="stat-value">'+fmtTokens(m.inputTokens)+'</span></div>'+
-      '<div class="stat-row"><span class="stat-label">Output tokens</span><span class="stat-value">'+fmtTokens(m.outputTokens)+'</span></div>'+
-      '<div class="stat-row"><span class="stat-label">Cache read</span><span class="stat-value accent">'+fmtTokens(m.cacheRead)+'</span></div>'+
-      '<div class="stat-row"><span class="stat-label">Cache hit rate</span><span class="stat-value accent">'+cacheHitPct+'%</span></div>'+
-      '<hr class="divider">'+
-      '<div class="stat-row"><span class="stat-label">Total context tokens</span><span class="stat-value">'+fmtTokens(m.totalTokens)+'</span></div>';
-    mg.appendChild(card);
-  });
-  if(!Object.keys(byModel).length)mg.innerHTML='<div class="card"><div class="stat-row"><span class="stat-label">No session data</span></div></div>';
+      function populateRailway(railway) {
+        const metric = document.getElementById("railwaySpend");
+        if (railway?.monthSpendUsd != null) {
+          metric.innerHTML = `${fmtCurrency(railway.monthSpendUsd)}<span>Railway monthly spend</span>`;
+        } else {
+          metric.innerHTML = `—<span>Railway monthly spend</span>`;
+        }
+        const list = document.getElementById("railwayBreakdown");
+        list.innerHTML = "";
+        (railway?.breakdown || []).forEach((item) => {
+          const li = document.createElement("li");
+          li.innerHTML = `<span>${item.measurement}</span><strong>${fmtCurrency(item.usd)}</strong>`;
+          list.appendChild(li);
+        });
+        setText("#infrastructureNote", railway?.note || "");
+      }
 
-  // Session list
-  var sl=document.getElementById('sessions-list');sl.innerHTML='';
-  sessions.forEach(function(s){
-    var active=(s.age||999999)<300000;
-    var item=document.createElement('div');item.className='session-item';
-    var shortKey=s.key.replace('agent:main:','');
-    item.innerHTML='<div class="status-dot '+(active?'dot-active':'dot-idle')+'"></div>'+
-      '<div class="session-name">'+shortKey+'</div>'+
-      '<div class="session-meta">'+s.model+' · '+fmtPct(s.percentUsed)+' ctx · '+fmtTokens(s.totalTokens)+' tokens</div>';
-    sl.appendChild(item);
-  });
-  if(!sessions.length)sl.innerHTML='<div class="session-item"><div class="status-dot dot-idle"></div><div class="session-name">No sessions</div></div>';
+      function populateDataForSEO(dataforseo) {
+        const metric = document.getElementById("dataforseoBalance");
+        if (dataforseo?.balance != null) {
+          const label = dataforseo.currency || "USD";
+          metric.innerHTML = `${fmtCurrency(dataforseo.balance)}<span>DataForSEO balance (${label})</span>`;
+        } else {
+          metric.innerHTML = `—<span>DataForSEO balance</span>`;
+        }
+      }
 
-  // Gumroad
-  var gr=d.gumroad||{};
-  if(gr.error==='no_token'){
-    document.getElementById('gr-sales').textContent='Token needed';
-    document.getElementById('gr-revenue').textContent='—';
-    document.getElementById('gr-recent').innerHTML='<div class="stat-row"><span class="stat-label" style="color:var(--yellow);font-size:11px">Get token from app.gumroad.com/settings/advanced → save to ~/.openclaw/gumroad_token</span></div>';
-    document.querySelector('#gumroad-card .card-badge').textContent='No Token';
-    document.querySelector('#gumroad-card .card-badge').className='card-badge badge-yellow';
-  } else if(gr.error){
-    document.getElementById('gr-sales').textContent='Error';
-    document.getElementById('gr-revenue').textContent=gr.error.substring(0,30);
-  } else {
-    document.getElementById('gr-sales').textContent=fmt(gr.total_sales_count);
-    document.getElementById('gr-revenue').textContent='$'+(gr.total_revenue_dollars||0).toFixed(2);
-    var rh='';
-    (gr.recent_sales||[]).slice(0,5).forEach(function(s){
-      rh+='<div class="stat-row"><span class="stat-label">'+s.product_name+'</span><span class="stat-value">$'+(s.price/100).toFixed(2)+'</span></div>';
-    });
-    document.getElementById('gr-recent').innerHTML=rh||'<div class="stat-row"><span class="stat-label">No sales yet</span></div>';
-  }
+      function populateCosmo(cosmo) {
+        const badge = document.getElementById("cosmoStatus");
+        badge.textContent = cosmo?.healthy ? "Healthy" : "Issue";
+        badge.className = `badge ${cosmo?.healthy ? "green" : "red"}`;
+        document.getElementById("cosmoUsers").innerHTML = `${fmtNumber(cosmo?.users)}<span>users</span>`;
+        document.getElementById("cosmoArticles").innerHTML = `${fmtNumber(cosmo?.articles)}<span>articles</span>`;
+        document.getElementById("cosmoSources").innerHTML = `${fmtNumber(cosmo?.sources)}<span>sources</span>`;
+        setText("#cosmoNote", cosmo?.note || "");
+      }
 
-  // Instagram
-  var ig=d.instagram||{};
-  document.getElementById('ig-followers').textContent=ig.error?'Error':fmt(ig.follower_count);
-  document.getElementById('ig-following').textContent=ig.error?ig.error.substring(0,40):fmt(ig.following_count);
-  document.getElementById('ig-posts').textContent=ig.error?'—':fmt(ig.media_count);
+      function populateGumroad(gumroad) {
+        const sales = gumroad?.sales != null ? gumroad.sales : "—";
+        const revenue = gumroad?.revenue != null ? fmtCurrency(gumroad.revenue) : "—";
+        document.getElementById("gumroadSales").innerHTML = `${sales}<span>total sales</span>`;
+        document.getElementById("gumroadRevenue").innerHTML = `${revenue}<span>revenue</span>`;
+        setText("#gumroadNote", gumroad?.note || "");
+      }
 
-  // Context/budget
-  var bg=document.getElementById('budget-grid');bg.innerHTML='';
-  var hasPct=sessions.filter(function(s){return s.percentUsed!=null;});
-  hasPct.forEach(function(s){
-    var pct=s.percentUsed||0;
-    var color=pct>80?'red':pct>60?'yellow':'green';
-    var shortKey=s.key.replace('agent:main:','');
-    var card=document.createElement('div');card.className='card';
-    card.innerHTML='<div class="card-header"><div class="card-title" style="font-size:12px;word-break:break-all">'+shortKey+'</div></div>'+
-      '<div class="budget-header"><span class="budget-label">'+fmtTokens(s.totalTokens)+' / '+fmtTokens(s.contextTokens)+'</span><span class="budget-value" style="color:var(--'+color+')">'+pct+'%</span></div>'+
-      '<div class="progress-wrap"><div class="progress-bar progress-'+color+'" style="width:'+pct+'%"></div></div>';
-    bg.appendChild(card);
-  });
-  if(!hasPct.length)bg.innerHTML='<div class="card"><div class="stat-row"><span class="stat-label">No session data</span></div></div>';
+      async function fetchData() {
+        try {
+          const res = await fetch(`data.json?_=${Date.now()}`);
+          if (!res.ok) throw new Error("Failed to load data");
+          const data = await res.json();
+          document.getElementById("updatedAt").textContent = new Date(data.updatedAt).toLocaleString();
 
-  // Alerts
-  var alerts=[];
-  sessions.forEach(function(s){if((s.percentUsed||0)>80)alerts.push({t:'danger',m:'⚠️ '+s.key.replace('agent:main:','')+' at '+s.percentUsed+'% context'});});
-  if(gr.error==='no_token')alerts.push({t:'warn',m:'⚠️ Gumroad: save API token to ~/.openclaw/gumroad_token'});
-  if(ig.error)alerts.push({t:'warn',m:'⚠️ Instagram: '+ig.error.substring(0,60)});
-  if(!alerts.length)alerts.push({t:'info',m:'ℹ️ All systems nominal.'});
-  document.getElementById('alerts-section').innerHTML=alerts.map(function(a){return '<div class="alert-item alert-'+a.t+'"><span>'+a.m+'</span></div>';}).join('');
-}
+          const openclaw = data.openclaw || {};
+          document.getElementById("aiTokens").innerHTML = `${fmtNumber(openclaw.todayTokens)}<span>tokens today</span>`;
+          document.getElementById("aiSpend").innerHTML = `${fmtCurrency(openclaw.todayCostUsd)}<span>est. cost</span>`;
+          document.getElementById("aiNote").textContent = openclaw.note || "";
+          renderModels(openclaw.modelsUsed);
 
-fetch('./data.json?_='+Date.now())
-  .then(function(r){return r.json();})
-  .then(populateDashboard)
-  .catch(function(e){
-    document.getElementById('last-updated').textContent='Error — run refresh-dashboard.py to generate data.json';
-    document.getElementById('alerts-section').innerHTML='<div class="alert-item alert-danger"><span>❌ Could not load data.json: '+e.message+'</span></div>';
-  });
-</script>
-</body>
+          populateRailway(data.railway);
+          populateDataForSEO(data.dataforseo);
+          populateGumroad(data.gumroad);
+          populateCosmo(data.cosmodigest);
+          document.getElementById("agentsNote").textContent = data.activeAgents?.notes || "Update manually.";
+        } catch (error) {
+          console.error(error);
+          alert("Unable to load dashboard data. Check console for details.");
+        }
+      }
+
+      document.getElementById("refreshBtn").addEventListener("click", () => fetchData());
+      fetchData();
+    </script>
+  </body>
 </html>
