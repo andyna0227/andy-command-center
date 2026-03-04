@@ -1,5 +1,6 @@
 {
   "updated_at": "2026-03-04T22:17:43.608559+00:00",
+  "updatedAt": "2026-03-04T18:11:50.857271+00:00",
   "openclaw": {
     "sessions": [
       {
@@ -167,7 +168,13 @@
     ],
     "totalCost": 0.226,
     "sessionCount": 10,
-    "note": "Costs are estimates based on public token pricing"
+    "note": "Costs are estimates based on public token pricing",
+    "todayTokens": 253025,
+    "todayCostUsd": 0.5068,
+    "modelsUsed": [
+      { "model": "gpt-5.1-codex", "sessions": 4, "tokens": 252960, "costUsd": 0.5059 },
+      { "model": "claude-sonnet-4-6", "sessions": 2, "tokens": 65, "costUsd": 0.0009 }
+    ]
   },
   "instagram": {
     "username": "the.typesetter",
@@ -177,7 +184,124 @@
     "full_name": ""
   },
   "gumroad": {
+    "sales": null,
+    "revenue": null,
     "error": "no_token",
     "note": "Save token to ~/.openclaw/gumroad_token"
+  },
+  "railway": {
+    "monthSpendUsd": 699.06,
+    "estimateUsd": 699.06,
+    "breakdown": [
+      { "measurement": "CPU_USAGE", "usd": 5.72 },
+      { "measurement": "MEMORY_USAGE_GB", "usd": 692.94 },
+      { "measurement": "NETWORK_RX_GB", "usd": 0.31 },
+      { "measurement": "NETWORK_TX_GB", "usd": 0.09 },
+      { "measurement": "DISK_USAGE_GB", "usd": 0.0 }
+    ],
+    "note": "Derived from Railway estimatedUsage"
+  },
+  "dataforseo": {
+    "balance": 48.979,
+    "currency": "USD",
+    "lastUpdated": "2026-03-04T18:11:52.502912+00:00",
+    "note": null
+  },
+  "cosmodigest": {
+    "users": null,
+    "articles": null,
+    "sources": null,
+    "healthy": true,
+    "responseMs": 1739,
+    "note": "Admin stats require auth"
+  },
+  "agents": [
+    {
+      "id": "andy",
+      "name": "Andy",
+      "role": "Orchestrator",
+      "model": "claude-sonnet-4-6",
+      "emoji": "🤖",
+      "status": "active",
+      "lastTask": "Debugging Boujé OAuth",
+      "sessionCost": 0.52
+    },
+    {
+      "id": "opie",
+      "name": "Opie",
+      "role": "Architect / PM",
+      "model": "claude-opus-4-6",
+      "emoji": "🧠",
+      "status": "idle",
+      "lastTask": "ment.ly infra review",
+      "sessionCost": 1.84
+    },
+    {
+      "id": "cody",
+      "name": "Cody",
+      "role": "Builder",
+      "model": "gpt-5.1-codex",
+      "emoji": "⚡",
+      "status": "active",
+      "lastTask": "Legal pages for getbouje.io",
+      "sessionCost": 0.31
+    },
+    {
+      "id": "nano",
+      "name": "Nano",
+      "role": "Marketing",
+      "model": "gemini-3-flash",
+      "emoji": "🎨",
+      "status": "idle",
+      "lastTask": "Carousel slide generation",
+      "sessionCost": 0.04
+    }
+  ],
+  "projects": [
+    {
+      "name": "Boujé",
+      "status": "in_progress",
+      "description": "Salon messaging platform",
+      "url": "https://dashboard.getbouje.io"
+    },
+    {
+      "name": "CosmoDigest",
+      "status": "in_progress",
+      "description": "Beauty industry intelligence",
+      "url": "https://cosmodigest.io"
+    },
+    {
+      "name": "ment.ly",
+      "status": "in_progress",
+      "description": "Idea capture app"
+    },
+    {
+      "name": "@the.typesetter",
+      "status": "in_progress",
+      "description": "Instagram + Gumroad brand"
+    }
+  ],
+  "crons": [
+    {
+      "name": "Nightly Cody Review",
+      "schedule": "12:00 AM EST daily",
+      "lastRun": "2026-03-04",
+      "status": "ok"
+    },
+    {
+      "name": "CosmoDigest Beat",
+      "schedule": "Multiple daily",
+      "lastRun": "2026-03-04",
+      "status": "ok"
+    },
+    {
+      "name": "X Engagement",
+      "schedule": "Daily",
+      "lastRun": "2026-03-04",
+      "status": "ok"
+    }
+  ],
+  "activeAgents": {
+    "notes": "Update manually with currently running subagents"
   }
 }

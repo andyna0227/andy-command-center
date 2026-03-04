@@ -3,349 +3,504 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mission Control</title>
+    <title>Mission Control · Agent HQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         color-scheme: dark;
-        --bg: #0d0d0d;
-        --card: #151515;
-        --border: #1f1f1f;
-        --muted: #8c90a4;
-        --accent-green: #28f09c;
-        --accent-red: #ff5f5f;
-        --accent-purple: #c084fc;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --bg: #0a0a0a;
+        --card: #111111;
+        --border: #1a1a1a;
+        --muted: #7c7f8a;
+        --accent: #00ff88;
+        --purple: #c084fc;
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
         min-height: 100vh;
-        background: var(--bg);
+        background: radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.05), transparent 40%),
+          radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.07), transparent 45%),
+          var(--bg);
         color: #f8fafc;
-        font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-        padding: 2.5rem clamp(1.25rem, 3vw, 3.5rem) 3.5rem;
       }
-      header {
+
+      .page {
+        padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 5vw, 4rem) 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      header.hero {
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
         justify-content: space-between;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 1.5rem;
       }
-      header h1 {
+
+      .hero h1 {
         margin: 0;
-        font-size: clamp(2.25rem, 4vw, 3rem);
-        letter-spacing: 0.03em;
+        font-size: clamp(2.5rem, 4vw, 3.25rem);
+        letter-spacing: 0.18em;
       }
-      header p {
-        margin: 0.35rem 0 0;
+
+      .hero h1 span {
+        color: var(--accent);
+      }
+
+      .hero p {
+        margin: 0.25rem 0 0;
+        font-size: 1rem;
         color: var(--muted);
       }
-      .actions {
+
+      .hero-controls {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         gap: 0.75rem;
+        min-width: 210px;
       }
-      button {
-        border: 1px solid var(--accent-purple);
-        background: transparent;
-        color: #f8fafc;
-        padding: 0.6rem 1.5rem;
-        border-radius: 999px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.25s, color 0.25s;
-      }
-      button:hover {
-        background: var(--accent-purple);
-        color: #0d0d0d;
-      }
+
       .timestamp {
         font-size: 0.9rem;
         color: var(--muted);
       }
-      main {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.5rem;
+
+      button.refresh {
+        padding: 0.65rem 1.75rem;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 255, 136, 0.5);
+        background: linear-gradient(120deg, rgba(0, 255, 136, 0.12), rgba(192, 132, 252, 0.12));
+        color: #f8fafc;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
+
+      button.refresh:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 30px rgba(0, 255, 136, 0.25);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .section-title {
+        font-size: 0.9rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+
       .card {
-        background: var(--card);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.4)), var(--card);
         border: 1px solid var(--border);
-        border-radius: 1rem;
+        border-radius: 20px;
         padding: 1.5rem;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+      }
+
+      .agent-card {
+        padding: 1.75rem;
         min-height: 220px;
       }
-      .card h2 {
-        margin: 0 0 1rem;
-        font-size: 1.25rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-      }
-      .metric {
-        font-size: clamp(1.6rem, 2.5vw, 2.3rem);
-        font-weight: 700;
-        margin: 0.2rem 0;
-      }
-      .metric span {
-        font-size: 0.85rem;
-        color: var(--muted);
-        font-weight: 500;
-        margin-left: 0.5rem;
-      }
-      .muted {
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-      .badge {
-        display: inline-flex;
+
+      .agent-header {
+        display: flex;
         align-items: center;
-        gap: 0.45rem;
-        padding: 0.35rem 0.8rem;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .agent-identity {
+        display: flex;
+        gap: 0.85rem;
+        align-items: center;
+      }
+
+      .agent-emoji {
+        font-size: 2rem;
+      }
+
+      .agent-text h3 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+
+      .agent-text span {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .badge-model {
+        padding: 0.35rem 0.75rem;
         border-radius: 999px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        background: rgba(192, 132, 252, 0.15);
+        border: 1px solid rgba(192, 132, 252, 0.5);
+        color: var(--purple);
+      }
+
+      .status-pill {
+        padding: 0.35rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
-      .badge.green {
-        background: rgba(40, 240, 156, 0.12);
-        color: var(--accent-green);
+
+      .status-pill.active {
+        color: #051b12;
+        background: radial-gradient(circle, rgba(0, 255, 136, 0.9), rgba(0, 255, 136, 0.55));
+        box-shadow: 0 0 15px rgba(0, 255, 136, 0.45);
       }
-      .badge.red {
-        background: rgba(255, 95, 95, 0.12);
-        color: var(--accent-red);
+
+      .status-pill.idle {
+        color: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.06);
       }
-      table {
+
+      .agent-body {
+        margin-top: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        font-size: 0.95rem;
+      }
+
+      .label {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .value {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+
+      .project-card h3 {
+        margin: 0 0 0.35rem;
+        font-size: 1.1rem;
+      }
+
+      .project-card h3 a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .project-card h3 a:hover {
+        color: var(--accent);
+      }
+
+      .project-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .project-status {
+        margin-top: 0.8rem;
+        font-size: 0.85rem;
+        color: var(--accent);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .spend-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+      }
+
+      .spend-card h4 {
+        margin: 0;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.18em;
+      }
+
+      .spend-card .amount {
+        margin-top: 0.5rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .spend-card small {
+        color: var(--muted);
+      }
+
+      table.cron-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 1rem;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
-      th,
-      td {
-        text-align: left;
-        padding: 0.45rem 0;
+
+      table.cron-table th,
+      table.cron-table td {
+        padding: 0.85rem 0.35rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
-      th {
-        color: var(--muted);
-        font-weight: 500;
+
+      table.cron-table th {
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-size: 0.78rem;
+        letter-spacing: 0.22em;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.55);
       }
-      ul.breakdown {
-        list-style: none;
-        padding: 0;
-        margin: 1rem 0 0;
+
+      .cron-status {
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 0.2em;
       }
-      ul.breakdown li {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.35rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        font-size: 0.95rem;
-      }
-      .active-placeholder {
-        border: 1px dashed rgba(255, 255, 255, 0.15);
-        padding: 1rem;
-        border-radius: 0.75rem;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
+
       @media (max-width: 640px) {
-        .actions {
+        .hero-controls {
           width: 100%;
           align-items: flex-start;
+        }
+        .agent-card {
+          padding: 1.25rem;
         }
       }
     </style>
   </head>
   <body>
-    <header>
-      <div>
-        <h1>Mission Control</h1>
-        <p>Live systems overview across agents, spend, and runway.</p>
-      </div>
-      <div class="actions">
-        <button id="refreshBtn">Refresh Data</button>
-        <div class="timestamp">Last updated <span id="updatedAt">—</span></div>
-      </div>
-    </header>
-
-    <main>
-      <section class="card" id="ai-costs">
-        <h2>AI Costs</h2>
-        <div class="metric" id="aiTokens">—<span>tokens today</span></div>
-        <div class="metric" id="aiSpend">—<span>est. cost</span></div>
-        <table id="modelsTable">
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Runs</th>
-              <th>Tokens</th>
-              <th>Cost</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <p class="muted" id="aiNote"></p>
-      </section>
-
-      <section class="card" id="infrastructure">
-        <h2>Infrastructure</h2>
-        <div class="metric" id="railwaySpend">—<span>Railway monthly spend</span></div>
-        <ul class="breakdown" id="railwayBreakdown"></ul>
-        <div class="metric" id="dataforseoBalance" style="margin-top:1.5rem;">
-          —<span>DataForSEO balance</span>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <h1>MISSION <span>CONTROL</span></h1>
+          <p>SEVENCUBED Operations — live Agent HQ overview</p>
         </div>
-        <p class="muted" id="infrastructureNote"></p>
-      </section>
-
-      <section class="card" id="gumroad">
-        <h2>Gumroad</h2>
-        <div class="metric" id="gumroadSales">—<span>total sales</span></div>
-        <div class="metric" id="gumroadRevenue">—<span>revenue</span></div>
-        <p class="muted" id="gumroadNote"></p>
-      </section>
-
-      <section class="card" id="cosmodigest">
-        <h2>CosmoDigest</h2>
-        <div id="cosmoStatus" class="badge">Checking…</div>
-        <div class="metric" id="cosmoUsers">—<span>users</span></div>
-        <div class="metric" id="cosmoArticles">—<span>articles</span></div>
-        <div class="metric" id="cosmoSources">—<span>sources</span></div>
-        <p class="muted" id="cosmoNote"></p>
-      </section>
-
-      <section class="card" id="activeAgents">
-        <h2>Active Agents</h2>
-        <div class="active-placeholder" id="agentsNote">
-          Add current deployments or sprint owners here.
+        <div class="hero-controls">
+          <button class="refresh" id="refreshBtn">Refresh</button>
+          <div class="timestamp">Last updated <span id="updatedAt">—</span></div>
         </div>
-      </section>
-    </main>
+      </header>
+
+      <main>
+        <section>
+          <div class="section-title">Agent Roster</div>
+          <div class="card-grid roster" id="agentGrid"></div>
+        </section>
+
+        <section>
+          <div class="section-title">Active Projects</div>
+          <div class="projects-grid" id="projectsGrid"></div>
+        </section>
+
+        <section>
+          <div class="section-title">Spend Overview</div>
+          <div class="spend-grid" id="spendGrid"></div>
+        </section>
+
+        <section>
+          <div class="section-title">Cron Jobs</div>
+          <div class="card">
+            <table class="cron-table" id="cronTable">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Schedule</th>
+                  <th>Last Run</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
 
     <script>
-      const fmtCurrency = (value) =>
+      const formatCurrency = (value) =>
         typeof value === "number"
           ? `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
           : "—";
 
-      const fmtNumber = (value) =>
-        typeof value === "number"
-          ? value.toLocaleString(undefined, { maximumFractionDigits: 0 })
-          : "—";
-
-      const setText = (selector, value) => {
-        const el = document.querySelector(selector);
-        if (el) {
-          el.textContent = value;
+      const formatDateTime = (value) => {
+        if (!value) return "—";
+        try {
+          return new Date(value).toLocaleString();
+        } catch (err) {
+          return value;
         }
       };
 
-      function renderModels(models) {
-        const tbody = document.querySelector("#modelsTable tbody");
-        tbody.innerHTML = "";
-        if (!models?.length) {
-          const row = document.createElement("tr");
-          const cell = document.createElement("td");
-          cell.textContent = "No runs logged";
-          cell.colSpan = 4;
-          cell.style.color = "var(--muted)";
-          row.appendChild(cell);
-          tbody.appendChild(row);
-          return;
-        }
-        models.forEach((model) => {
+      const createAgentCard = (agent) => {
+        const card = document.createElement("article");
+        card.className = "card agent-card";
+        card.innerHTML = `
+          <div class="agent-header">
+            <div class="agent-identity">
+              <div class="agent-emoji">${agent.emoji || ""}</div>
+              <div class="agent-text">
+                <h3>${agent.name || ""}</h3>
+                <span>${agent.role || ""}</span>
+              </div>
+            </div>
+            <div class="badge-model">${agent.model || ""}</div>
+          </div>
+          <div class="agent-body">
+            <div class="status-pill ${agent.status === "active" ? "active" : "idle"}">
+              ${agent.status || "idle"}
+            </div>
+            <div>
+              <div class="label">Last Task</div>
+              <div class="value">${agent.lastTask || "—"}</div>
+            </div>
+            <div>
+              <div class="label">Session Cost</div>
+              <div class="value">${formatCurrency(agent.sessionCost)}</div>
+            </div>
+          </div>
+        `;
+        return card;
+      };
+
+      const renderAgents = (agents = []) => {
+        const grid = document.getElementById("agentGrid");
+        grid.innerHTML = "";
+        agents.forEach((agent) => grid.appendChild(createAgentCard(agent)));
+      };
+
+      const renderProjects = (projects = []) => {
+        const grid = document.getElementById("projectsGrid");
+        grid.innerHTML = "";
+        projects.forEach((project) => {
+          const card = document.createElement("article");
+          card.className = "card project-card";
+          const statusLabel = project.status?.replace("_", " ") || "";
+          card.innerHTML = `
+            <h3>${project.url ? `<a href="${project.url}" target="_blank" rel="noreferrer">${project.name}</a>` : project.name}</h3>
+            <p>${project.description || ""}</p>
+            <div class="project-status">${statusLabel}</div>
+          `;
+          grid.appendChild(card);
+        });
+      };
+
+      const renderSpend = (data) => {
+        const items = [
+          {
+            label: "Railway",
+            amount: formatCurrency(data?.railway?.monthSpendUsd),
+            sub: "Month spend"
+          },
+          {
+            label: "DataForSEO",
+            amount:
+              data?.dataforseo?.balance != null
+                ? `${formatCurrency(data.dataforseo.balance)} ${data.dataforseo.currency || "USD"}`
+                : "—",
+            sub: "Balance"
+          },
+          {
+            label: "OpenClaw",
+            amount: formatCurrency(data?.openclaw?.todayCostUsd),
+            sub: "Today"
+          }
+        ];
+        const grid = document.getElementById("spendGrid");
+        grid.innerHTML = "";
+        items.forEach((item) => {
+          const card = document.createElement("article");
+          card.className = "card spend-card";
+          card.innerHTML = `
+            <h4>${item.label}</h4>
+            <div class="amount">${item.amount}</div>
+            <small>${item.sub}</small>
+          `;
+          grid.appendChild(card);
+        });
+      };
+
+      const renderCrons = (crons = []) => {
+        const body = document.querySelector("#cronTable tbody");
+        body.innerHTML = "";
+        crons.forEach((cron) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${model.model}</td>
-            <td>${model.sessions}</td>
-            <td>${fmtNumber(model.tokens)}</td>
-            <td>${fmtCurrency(model.costUsd)}</td>
+            <td>${cron.name || ""}</td>
+            <td>${cron.schedule || ""}</td>
+            <td>${cron.lastRun || ""}</td>
+            <td class="cron-status">${cron.status || ""}</td>
           `;
-          tbody.appendChild(row);
+          body.appendChild(row);
         });
-      }
+      };
 
-      function populateRailway(railway) {
-        const metric = document.getElementById("railwaySpend");
-        if (railway?.monthSpendUsd != null) {
-          metric.innerHTML = `${fmtCurrency(railway.monthSpendUsd)}<span>Railway monthly spend</span>`;
-        } else {
-          metric.innerHTML = `—<span>Railway monthly spend</span>`;
-        }
-        const list = document.getElementById("railwayBreakdown");
-        list.innerHTML = "";
-        (railway?.breakdown || []).forEach((item) => {
-          const li = document.createElement("li");
-          li.innerHTML = `<span>${item.measurement}</span><strong>${fmtCurrency(item.usd)}</strong>`;
-          list.appendChild(li);
-        });
-        setText("#infrastructureNote", railway?.note || "");
-      }
-
-      function populateDataForSEO(dataforseo) {
-        const metric = document.getElementById("dataforseoBalance");
-        if (dataforseo?.balance != null) {
-          const label = dataforseo.currency || "USD";
-          metric.innerHTML = `${fmtCurrency(dataforseo.balance)}<span>DataForSEO balance (${label})</span>`;
-        } else {
-          metric.innerHTML = `—<span>DataForSEO balance</span>`;
-        }
-      }
-
-      function populateCosmo(cosmo) {
-        const badge = document.getElementById("cosmoStatus");
-        badge.textContent = cosmo?.healthy ? "Healthy" : "Issue";
-        badge.className = `badge ${cosmo?.healthy ? "green" : "red"}`;
-        document.getElementById("cosmoUsers").innerHTML = `${fmtNumber(cosmo?.users)}<span>users</span>`;
-        document.getElementById("cosmoArticles").innerHTML = `${fmtNumber(cosmo?.articles)}<span>articles</span>`;
-        document.getElementById("cosmoSources").innerHTML = `${fmtNumber(cosmo?.sources)}<span>sources</span>`;
-        setText("#cosmoNote", cosmo?.note || "");
-      }
-
-      function populateGumroad(gumroad) {
-        const sales = gumroad?.sales != null ? gumroad.sales : "—";
-        const revenue = gumroad?.revenue != null ? fmtCurrency(gumroad.revenue) : "—";
-        document.getElementById("gumroadSales").innerHTML = `${sales}<span>total sales</span>`;
-        document.getElementById("gumroadRevenue").innerHTML = `${revenue}<span>revenue</span>`;
-        setText("#gumroadNote", gumroad?.note || "");
-      }
-
-      async function fetchData() {
+      async function loadDashboard() {
         try {
-          const res = await fetch(`data.json?_=${Date.now()}`);
-          if (!res.ok) throw new Error("Failed to load data");
-          const data = await res.json();
-          document.getElementById("updatedAt").textContent = new Date(data.updatedAt).toLocaleString();
-
-          const openclaw = data.openclaw || {};
-          document.getElementById("aiTokens").innerHTML = `${fmtNumber(openclaw.todayTokens)}<span>tokens today</span>`;
-          document.getElementById("aiSpend").innerHTML = `${fmtCurrency(openclaw.todayCostUsd)}<span>est. cost</span>`;
-          document.getElementById("aiNote").textContent = openclaw.note || "";
-          renderModels(openclaw.modelsUsed);
-
-          populateRailway(data.railway);
-          populateDataForSEO(data.dataforseo);
-          populateGumroad(data.gumroad);
-          populateCosmo(data.cosmodigest);
-          document.getElementById("agentsNote").textContent = data.activeAgents?.notes || "Update manually.";
+          const response = await fetch(`data.json?_=${Date.now()}`);
+          if (!response.ok) throw new Error("Failed to load data");
+          const data = await response.json();
+          document.getElementById("updatedAt").textContent = formatDateTime(data.updatedAt);
+          renderAgents(data.agents || []);
+          renderProjects(data.projects || []);
+          renderSpend(data);
+          renderCrons(data.crons || []);
         } catch (error) {
           console.error(error);
-          alert("Unable to load dashboard data. Check console for details.");
+          alert("Unable to load Mission Control data.");
         }
       }
 
-      document.getElementById("refreshBtn").addEventListener("click", () => fetchData());
-      fetchData();
+      document.getElementById("refreshBtn").addEventListener("click", loadDashboard);
+      loadDashboard();
     </script>
   </body>
 </html>
