@@ -1,72 +1,183 @@
 {
-  "updatedAt": "2026-03-04T18:11:50.857271+00:00",
-  "railway": {
-    "monthSpendUsd": 699.06,
-    "estimateUsd": 699.06,
-    "breakdown": [
+  "updated_at": "2026-03-04T22:17:43.608559+00:00",
+  "openclaw": {
+    "sessions": [
       {
-        "measurement": "CPU_USAGE",
-        "usd": 5.72
+        "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772328004.741159",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 87799,
+        "percentUsed": 44,
+        "remainingTokens": 112201,
+        "contextTokens": 200000,
+        "inputTokens": 5,
+        "outputTokens": 554,
+        "cacheRead": 259917,
+        "cacheWrite": 2926,
+        "estimatedCost": 0.0863,
+        "updatedAt": 1772662604813
       },
       {
-        "measurement": "MEMORY_USAGE_GB",
-        "usd": 692.94
+        "key": "agent:main:main",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 23677,
+        "percentUsed": 12,
+        "remainingTokens": 176323,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 8,
+        "cacheRead": 0,
+        "cacheWrite": 23674,
+        "estimatedCost": 0.0001,
+        "updatedAt": 1772662604796
       },
       {
-        "measurement": "NETWORK_RX_GB",
-        "usd": 0.31
+        "key": "agent:main:telegram:direct:1695967946",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 142800,
+        "percentUsed": 71,
+        "remainingTokens": 57200,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 281,
+        "cacheRead": 142457,
+        "cacheWrite": 340,
+        "estimatedCost": 0.047,
+        "updatedAt": 1772662412119
       },
       {
-        "measurement": "NETWORK_TX_GB",
-        "usd": 0.09
+        "key": "agent:main:slack:channel:c0ak7nk3ere",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 73137,
+        "percentUsed": 37,
+        "remainingTokens": 126863,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 46,
+        "cacheRead": 0,
+        "cacheWrite": 73134,
+        "estimatedCost": 0.0007,
+        "updatedAt": 1772662008821
       },
       {
-        "measurement": "DISK_USAGE_GB",
-        "usd": 0.0
+        "key": "agent:main:subagent:b3ecd044-360e-41de-b296-e78ef5004ad3",
+        "model": "gpt-5.1-codex",
+        "totalTokens": null,
+        "percentUsed": null,
+        "remainingTokens": null,
+        "contextTokens": 128000,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "estimatedCost": 0.0,
+        "updatedAt": 1772661690617
+      },
+      {
+        "key": "agent:main:slack:channel:c0ahtk9m9r6",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 71121,
+        "percentUsed": 36,
+        "remainingTokens": 128879,
+        "contextTokens": 200000,
+        "inputTokens": 4,
+        "outputTokens": 936,
+        "cacheRead": 70063,
+        "cacheWrite": 71120,
+        "estimatedCost": 0.0351,
+        "updatedAt": 1772658341657
+      },
+      {
+        "key": "agent:main:slack:channel:c0ahtjka4qy",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 85788,
+        "percentUsed": 43,
+        "remainingTokens": 114212,
+        "contextTokens": 200000,
+        "inputTokens": 4,
+        "outputTokens": 268,
+        "cacheRead": 170664,
+        "cacheWrite": 623,
+        "estimatedCost": 0.0552,
+        "updatedAt": 1772596047629
+      },
+      {
+        "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772247995.015189",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 86467,
+        "percentUsed": 43,
+        "remainingTokens": 113533,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 37,
+        "cacheRead": 0,
+        "cacheWrite": 86464,
+        "estimatedCost": 0.0006,
+        "updatedAt": 1772589942654
+      },
+      {
+        "key": "agent:main:slack:channel:c0ahtk71ska",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 23750,
+        "percentUsed": 12,
+        "remainingTokens": 176250,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 19,
+        "cacheRead": 0,
+        "cacheWrite": 23747,
+        "estimatedCost": 0.0003,
+        "updatedAt": 1772581458021
+      },
+      {
+        "key": "agent:main:slack:direct:u0a6a4v0jse:thread:1772549892.893239",
+        "model": "claude-sonnet-4-6",
+        "totalTokens": 22600,
+        "percentUsed": 11,
+        "remainingTokens": 177400,
+        "contextTokens": 200000,
+        "inputTokens": 3,
+        "outputTokens": 47,
+        "cacheRead": 0,
+        "cacheWrite": 22597,
+        "estimatedCost": 0.0007,
+        "updatedAt": 1772549899658
       }
     ],
-    "note": "Derived from Railway estimatedUsage"
-  },
-  "dataforseo": {
-    "balance": 48.979,
-    "currency": "USD",
-    "lastUpdated": "2026-03-04T18:11:52.502912+00:00",
-    "note": null
-  },
-  "gumroad": {
-    "sales": null,
-    "revenue": null,
-    "note": "Needs Gumroad API token for live data"
-  },
-  "cosmodigest": {
-    "users": null,
-    "articles": null,
-    "sources": null,
-    "healthy": true,
-    "responseMs": 1739,
-    "note": "Admin stats require auth"
-  },
-  "openclaw": {
-    "todayTokens": 253025,
-    "todayCostUsd": 0.5068,
-    "modelsUsed": [
-      {
-        "model": "gpt-5.1-codex",
-        "sessions": 4,
-        "tokens": 252960,
-        "costUsd": 0.5059
-      },
+    "byModel": [
       {
         "model": "claude-sonnet-4-6",
-        "sessions": 2,
-        "tokens": 65,
-        "costUsd": 0.0009
+        "inputTokens": 31,
+        "outputTokens": 2196,
+        "cacheRead": 643101,
+        "cacheWrite": 304625,
+        "cacheHitPct": 99.7,
+        "estimatedCost": 0.226,
+        "sessions": 9
+      },
+      {
+        "model": "gpt-5.1-codex",
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "cacheHitPct": 0,
+        "estimatedCost": 0.0,
+        "sessions": 1
       }
     ],
+    "totalCost": 0.226,
     "sessionCount": 10,
-    "note": null
+    "note": "Costs are estimates based on public token pricing"
   },
-  "activeAgents": {
-    "notes": "Update manually with currently running subagents"
+  "instagram": {
+    "username": "the.typesetter",
+    "follower_count": 1,
+    "following_count": 0,
+    "media_count": 1,
+    "full_name": ""
+  },
+  "gumroad": {
+    "error": "no_token",
+    "note": "Save token to ~/.openclaw/gumroad_token"
   }
 }
