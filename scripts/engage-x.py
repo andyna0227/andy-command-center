@@ -15,7 +15,7 @@ import google.generativeai as genai
 from playwright.sync_api import Error, Page, TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
-PROFILE_PATH = os.path.expanduser("~/.openclaw/browser/openclaw")
+PROFILE_PATH = os.path.expanduser("~/Library/Application Support/Google/Chrome")
 ENGAGEMENT_LOG = Path("~/.openclaw/workspace/engagement-log.md").expanduser()
 MAX_REPLIES_PER_RUN = 5
 SEARCH_URL = (
@@ -195,7 +195,8 @@ def main() -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch_persistent_context(
             user_data_dir=PROFILE_PATH,
-            headless=True,
+            headless=False,
+        channel="chrome",
             args=["--no-sandbox", "--disable-dev-shm-usage"],
         )
         search_page = browser.new_page()
